@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinos Premium</title>
+
+<style>
+/* ===============================
+   RESET BÁSICO
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    background: #ffffff;
+    color: #222;
+}
+
+/* ===============================
+   CONTENEDOR GENERAL
+================================ */
+.section-destinos {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* ===============================
+   BLOQUE DE PAÍS
+================================ */
+.pais-block {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 80px;
+
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease, transform 1s ease;
+    will-change: transform, opacity;
+}
+
+.pais-block.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===============================
+   IMAGEN
+================================ */
+.pais-img {
+    flex: 1;
+    overflow: hidden;
+
+    opacity: 0;
+    transform: translateX(-30px) scale(1.04);
+    transition: transform 1.2s ease, opacity 1.2s ease;
+    will-change: transform;
+}
+
+.pais-block.is-visible .pais-img {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.pais-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+/* ===============================
+   TEXTO / DESCRIPCIÓN
+================================ */
+.pais-info {
+    flex: 1;
+
+    opacity: 0;
+    transform: translateX(35px);
+    transition: opacity 0.9s ease 0.35s, transform 0.9s ease 0.35s;
+}
+
+.pais-block.is-visible .pais-info {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.pais-info h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.pais-info p {
+    font-size: 16px;
+    color: #444;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .pais-block {
+        flex-direction: column;
+    }
+
+    .pais-img,
+    .pais-info {
+        transform: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="section-destinos">
+
+    <!-- DESTINO 1 -->
+    <div class="pais-block">
+        <div class="pais-img parallax">
+            <img src="https://via.placeholder.com/600x400" alt="Egipto">
+        </div>
+        <div class="pais-info">
+            <h2>Egipto</h2>
+            <p>
+                Descubre la grandeza del Antiguo Egipto con un recorrido exclusivo
+                por pirámides, templos y el majestuoso río Nilo. Un viaje cultural,
+                histórico y espiritual.
+            </p>
+        </div>
+    </div>
+
+    <!-- DESTINO 2 -->
+    <div class="pais-block">
+        <div class="pais-img parallax">
+            <img src="https://via.placeholder.com/600x400" alt="Italia">
+        </div>
+        <div class="pais-info">
+            <h2>Italia</h2>
+            <p>
+                Vive la esencia de Europa recorriendo Roma, Florencia y Venecia.
+                Arte, gastronomía y paisajes icónicos en una experiencia premium.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<script>
+/**
+ * Revelado de bloques (POO)
+ */
+class PaisReveal {
+    constructor(element) {
+        this.element = element;
+        this.initObserver();
+    }
+
+    initObserver() {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.element.classList.add('is-visible');
+                        observer.unobserve(this.element);
+                    }
+                });
+            },
+            {
+                threshold: 0.25,
+                rootMargin: '0px 0px -60px 0px'
+            }
+        );
+
+        observer.observe(this.element);
+    }
+}
+
+/**
+ * Parallax suave en imágenes (POO)
+ */
+class ImageParallax {
+    constructor(element) {
+        this.element = element;
+        this.speed = 0.15; // intensidad muy sutil
+        this.onScroll = this.onScroll.bind(this);
+        this.init();
+    }
+
+    init() {
+        window.addEventListener('scroll', this.onScroll, { passive: true });
+    }
+
+    onScroll() {
+        const rect = this.element.getBoundingClientRect();
+        const offset = rect.top * this.speed;
+        this.element.style.transform = `translateY(${offset}px)`;
+    }
+}
+
+/**
+ * Inicialización general
+ */
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Animación de entrada por bloque
+    document.querySelectorAll('.pais-block').forEach(block => {
+        new PaisReveal(block);
+    });
+
+    // Parallax solo en imágenes marcadas
+    document.querySelectorAll('.parallax').forEach(img => {
+        new ImageParallax(img);
+    });
+
+});
+</script>
+
+</body>
+</html>
