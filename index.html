@@ -1,227 +1,264 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Destinos Premium</title>
+    <meta charset="UTF-8">
+    <title>EMI & EMI – Wotman Technology Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-/* ===============================
-   RESET BÁSICO
-================================ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <style>
+        /* =======================
+           RESET GENERAL
+        ======================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6;
-    background: #ffffff;
-    color: #222;
-}
+        body {
+            background: linear-gradient(180deg, #f5f7fb, #e9eef8);
+            color: #1f2933;
+            overflow-x: hidden;
+        }
 
-/* ===============================
-   CONTENEDOR GENERAL
-================================ */
-.section-destinos {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 20px;
-}
+        a {
+            text-decoration: none;
+        }
 
-/* ===============================
-   BLOQUE DE PAÍS
-================================ */
-.pais-block {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    margin-bottom: 80px;
+        /* =======================
+           HEADER
+        ======================== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            animation: slideDown 0.8s ease;
+        }
 
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s ease, transform 1s ease;
-    will-change: transform, opacity;
-}
+        header strong {
+            font-size: 20px;
+            font-weight: 700;
+        }
 
-.pais-block.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+        nav a {
+            margin-left: 25px;
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-/* ===============================
-   IMAGEN
-================================ */
-.pais-img {
-    flex: 1;
-    overflow: hidden;
+        nav a:hover {
+            color: #2563eb;
+        }
 
-    opacity: 0;
-    transform: translateX(-30px) scale(1.04);
-    transition: transform 1.2s ease, opacity 1.2s ease;
-    will-change: transform;
-}
+        .btn-primary {
+            background: #2563eb;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-.pais-block.is-visible .pais-img {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-}
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(37,99,235,0.4);
+        }
 
-.pais-img img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 10px;
-}
+        /* =======================
+           HERO
+        ======================== */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 90px 60px;
+            gap: 60px;
+        }
 
-/* ===============================
-   TEXTO / DESCRIPCIÓN
-================================ */
-.pais-info {
-    flex: 1;
+        .hero-text {
+            max-width: 600px;
+            animation: fadeLeft 1s ease forwards;
+            opacity: 0;
+        }
 
-    opacity: 0;
-    transform: translateX(35px);
-    transition: opacity 0.9s ease 0.35s, transform 0.9s ease 0.35s;
-}
+        .badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #1d4ed8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
 
-.pais-block.is-visible .pais-info {
-    opacity: 1;
-    transform: translateX(0);
-}
+        h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
 
-.pais-info h2 {
-    font-size: 28px;
-    margin-bottom: 15px;
-}
+        h1 span {
+            color: #f59e0b;
+        }
 
-.pais-info p {
-    font-size: 16px;
-    color: #444;
-}
+        .hero-text p {
+            font-size: 18px;
+            color: #4b5563;
+            margin-bottom: 30px;
+        }
 
-/* ===============================
-   RESPONSIVE
-================================ */
-@media (max-width: 768px) {
-    .pais-block {
-        flex-direction: column;
-    }
+        .hero-buttons a {
+            margin-right: 15px;
+        }
 
-    .pais-img,
-    .pais-info {
-        transform: none;
-    }
-}
-</style>
+        .btn-secondary {
+            border: 2px solid #2563eb;
+            color: #2563eb;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        /* =======================
+           IMAGEN + LOGO
+        ======================== */
+        .hero-image {
+            position: relative;
+            width: 360px;
+            animation: popIn 1.2s ease forwards;
+            opacity: 0;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .logo-text {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 25px rgba(0,0,0,0.6);
+        }
+
+        .logo-text .l1 { font-size: 26px; }
+        .logo-text .l2 { font-size: 20px; margin-top: 6px; }
+        .logo-text .l3 { font-size: 16px; margin-top: 6px; opacity: 0.9; }
+
+        /* =======================
+           FOOTER
+        ======================== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+            color: #6b7280;
+            background: #ffffff;
+            animation: fadeUp 1s ease;
+        }
+
+        /* =======================
+           ANIMACIONES
+        ======================== */
+        @keyframes fadeLeft {
+            from { transform: translateX(-40px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* =======================
+           RESPONSIVE
+        ======================== */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<section class="section-destinos">
+<header>
+    <strong>EMI & EMI</strong>
+    <nav>
+        <a href="#">Solución</a>
+        <a href="#">Proceso</a>
+        <a href="#">Contacto</a>
+        <a href="#" class="btn-primary">Cotización</a>
+    </nav>
+</header>
 
-    <!-- DESTINO 1 -->
-    <div class="pais-block">
-        <div class="pais-img parallax">
-            <img src="https://via.placeholder.com/600x400" alt="Egipto">
-        </div>
-        <div class="pais-info">
-            <h2>Egipto</h2>
-            <p>
-                Descubre la grandeza del Antiguo Egipto con un recorrido exclusivo
-                por pirámides, templos y el majestuoso río Nilo. Un viaje cultural,
-                histórico y espiritual.
-            </p>
+<section class="hero">
+    <div class="hero-text">
+        <span class="badge">Automatización integral sin perder oportunidades</span>
+        <h1>
+            Si tu empresa <span>responde tarde</span>, estás perdiendo leads,
+            ventas y dinero.
+        </h1>
+        <p>
+            Creamos sistemas inteligentes con automatización e IA para que tu
+            negocio funcione 24/7 sin fricción.
+        </p>
+        <div class="hero-buttons">
+            <a href="#" class="btn-primary">Pedir diagnóstico</a>
+            <a href="#" class="btn-secondary">Ver la solución</a>
         </div>
     </div>
 
-    <!-- DESTINO 2 -->
-    <div class="pais-block">
-        <div class="pais-img parallax">
-            <img src="https://via.placeholder.com/600x400" alt="Italia">
-        </div>
-        <div class="pais-info">
-            <h2>Italia</h2>
-            <p>
-                Vive la esencia de Europa recorriendo Roma, Florencia y Venecia.
-                Arte, gastronomía y paisajes icónicos en una experiencia premium.
-            </p>
+    <div class="hero-image">
+        <img src="emi.png" alt="EMI & EMI Technology Lab">
+        <div class="logo-text">
+            <div class="l1">EMI & EMI</div>
+            <div class="l2">WOTMAN</div>
+            <div class="l3">TECHNOLOGY LAB</div>
         </div>
     </div>
-
 </section>
 
-<script>
-/**
- * Revelado de bloques (POO)
- */
-class PaisReveal {
-    constructor(element) {
-        this.element = element;
-        this.initObserver();
-    }
-
-    initObserver() {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        this.element.classList.add('is-visible');
-                        observer.unobserve(this.element);
-                    }
-                });
-            },
-            {
-                threshold: 0.25,
-                rootMargin: '0px 0px -60px 0px'
-            }
-        );
-
-        observer.observe(this.element);
-    }
-}
-
-/**
- * Parallax suave en imágenes (POO)
- */
-class ImageParallax {
-    constructor(element) {
-        this.element = element;
-        this.speed = 0.15; // intensidad muy sutil
-        this.onScroll = this.onScroll.bind(this);
-        this.init();
-    }
-
-    init() {
-        window.addEventListener('scroll', this.onScroll, { passive: true });
-    }
-
-    onScroll() {
-        const rect = this.element.getBoundingClientRect();
-        const offset = rect.top * this.speed;
-        this.element.style.transform = `translateY(${offset}px)`;
-    }
-}
-
-/**
- * Inicialización general
- */
-document.addEventListener('DOMContentLoaded', () => {
-
-    // Animación de entrada por bloque
-    document.querySelectorAll('.pais-block').forEach(block => {
-        new PaisReveal(block);
-    });
-
-    // Parallax solo en imágenes marcadas
-    document.querySelectorAll('.parallax').forEach(img => {
-        new ImageParallax(img);
-    });
-
-});
-</script>
+<footer>
+    © 2023 EMI & EMI – Wotman Technology Lab – Sistemas Web IA
+</footer>
 
 </body>
 </html>
